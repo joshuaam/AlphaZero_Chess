@@ -206,7 +206,6 @@ def load_pickle(filename):
 
 def MCTS_self_play(chessnet, num_games, cpu):
     wl_count = 0
-    st = time.time()
     for idxx in range(0, num_games):
         current_board = c_board()
         checkmate = False
@@ -215,6 +214,7 @@ def MCTS_self_play(chessnet, num_games, cpu):
         value = 0
 
         while checkmate == False and current_board.move_count <= 100:
+            st = time.time()
             draw_counter = 0
             for s in states:
                 if np.array_equal(current_board.current_board, s):
