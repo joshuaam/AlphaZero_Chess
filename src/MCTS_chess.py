@@ -206,15 +206,17 @@ def load_pickle(filename):
 
 def MCTS_self_play(chessnet, num_games, cpu):
     wl_count = 0
+    st = time.time()
+
     for idxx in range(0, num_games):
         current_board = c_board()
+        print(current_board.current_board, current_board.move_count)
         checkmate = False
         dataset = []  # to get state, policy, value for neural network training
         states = []
         value = 0
-
-        while checkmate == False and current_board.move_count <= 100:
-            st = time.time()
+        while checkmate == False and current_board.move_count <= 2:
+            move_st = time.time()
             draw_counter = 0
             for s in states:
                 if np.array_equal(current_board.current_board, s):
@@ -228,7 +230,7 @@ def MCTS_self_play(chessnet, num_games, cpu):
             policy = get_policy(root)
             dataset.append([board_state, policy])
             # print(current_board.current_board,current_board.move_count)
-            # print("Move took {} seconds".format(int(time.time() - st)))
+            # print("Move took {} seconds".format(int(time.time() - move_st)))
             # print(" ")
             if current_board.check_status() == True and current_board.in_check_possible_moves() == []:  # checkmate
                 if current_board.player == 0:  # black wins
@@ -237,6 +239,13 @@ def MCTS_self_play(chessnet, num_games, cpu):
                     value = 1
                 wl_count += 1
                 checkmate = True
+            elif "p" not in current_board.current_board and "r" not in current_board.current_board and \
+                    "n" not in current_board.current_board and "b" not in current_board.current_board and \
+                    "q" not in current_board.current_board and "P" not in current_board.current_board and \
+                    "R" not in current_board.current_board and "N" not in current_board.current_board and \
+                    "B" not in current_board.current_board and "Q" not in current_board.current_board:
+                break
+
         # print("Game end: {}, move: {}, time: {}, cpu: {}".format(
         #     value, current_board.move_count, int(time.time() - st), cpu))
 

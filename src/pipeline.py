@@ -27,12 +27,13 @@ if __name__ == "__main__":
         net.load_state_dict(checkpoint['state_dict'])
         processes1 = []
         for i in range(4):
-            p1 = mp.Process(target=MCTS_self_play, args=(net, 15, i))
+            p1 = mp.Process(target=MCTS_self_play, args=(net, 50, i))
             p1.start()
             processes1.append(p1)
         for p1 in processes1:
             p1.join()
-        # MCTS_self_play(net, 6, 0)
+        # MCTS_self_play(net, 50, 0)
+        # exit()
         # Runs Net training
         net_to_train = "current_net_trained8_iter1.pth.tar";
         save_as = "current_net_trained8_iter1.pth.tar"

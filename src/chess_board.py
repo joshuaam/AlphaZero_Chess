@@ -11,23 +11,34 @@ class board():
         # self.init_board[0,0] = "r"
         # self.init_board[0,1] = "n"
         # self.init_board[0, 2] = "b"
-        self.init_board[0, 3] = "q"
+        # self.init_board[0, 3] = "q"
         self.init_board[0, 4] = "k"
         # self.init_board[0, 5] = "b"
         # self.init_board[0,6] = "n"
         # self.init_board[0,7] = "r"
-        self.init_board[1,3:5] = "p"
+        # self.init_board[1,3:5] = "p"
         # self.init_board[1,0:8] = "p"
         # self.init_board[7,0] = "R"
         # self.init_board[7,1] = "N"
         # self.init_board[7, 2] = "B"
-        self.init_board[7, 3] = "Q"
+        # self.init_board[7, 3] = "Q"
         self.init_board[7, 4] = "K"
         # self.init_board[7, 5] = "B"
         # self.init_board[7,6] = "N"
         # self.init_board[7,7] = "R"
         # self.init_board[6,0:8] = "P"
-        self.init_board[6, 3:5] = "P"
+        # self.init_board[6, 3:5] = "P"
+
+        self.init_board[1,3:8] = "p"
+        self.init_board[1,1] = "p"
+        self.init_board[2,1] = "P"
+        self.init_board[3,0] = "P"
+        self.init_board[2, 0] = "R"
+
+        self.init_board[6, 3] = "r"
+        self.init_board[6, 5] = "r"
+        self.init_board[5:7, 4] = "p"
+
         self.init_board[self.init_board == "0.0"] = " "
         self.move_count = 0
         self.no_progress_count = 0
@@ -38,10 +49,10 @@ class board():
         self.en_passant_move = 0  # returns j index of last en_passant pawn
         self.r1_move_count = 0  # black's queenside rook
         self.r2_move_count = 0  # black's kingside rook
-        self.k_move_count = 0
+        self.k_move_count = 1 # Remove ability to castle as caslting logic is incorrect (king can castle through threatened spaces and can still castle if the rook was not placed initially)
         self.R1_move_count = 0  # white's queenside rook
         self.R2_move_count = 0  # white's kingside rook
-        self.K_move_count = 0
+        self.K_move_count = 1 # Remove ability to castle as caslting logic is incorrect (king can castle through threatened spaces and can still castle if the rook was not placed initially)
         self.current_board = self.init_board
         self.en_passant_move_copy = None
         self.copy_board = None;
